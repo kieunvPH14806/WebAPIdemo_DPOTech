@@ -12,15 +12,15 @@ namespace WebAPIdemo_DPOTech.Controllers
     [ApiController]
     public class NewsController : ControllerBase
     {
-        private readonly NewsServiceForController _serviceForController;
+        private readonly NewsServiceController _serviceForController;
 
-        public NewsController(NewsServiceForController serviceForController)
+        public NewsController(NewsServiceController serviceForController)
         {
             _serviceForController = serviceForController;
         }
 
         [HttpGet("Get")]
-        public List<NewsForView> GetNews()
+        public List<NewsView> GetNews()
         {
 
             try
@@ -35,12 +35,12 @@ namespace WebAPIdemo_DPOTech.Controllers
         }
 
         [HttpGet("GetOne/{name}")]
-        public NewsForView GetOne(string name)
+        public NewsView GetOne(string name)
         {
             try
             {
 
-                NewsForView newsForView = new NewsForView();
+                NewsView newsForView = new NewsView();
                 newsForView = _serviceForController.GetNewsForAll()[_serviceForController.GetNewsForAll().FindIndex(c => c.NewsName == name)];
                 return newsForView;
             }
@@ -50,7 +50,7 @@ namespace WebAPIdemo_DPOTech.Controllers
             }
         }
         [HttpPost("Add")]
-        public IActionResult Add(NewsForView newsForView)
+        public IActionResult Add(NewsView newsForView)
         {
 
             try
@@ -66,7 +66,7 @@ namespace WebAPIdemo_DPOTech.Controllers
         }
 
         [HttpPut("Edit/{name}")]
-        public IActionResult Edit(NewsForView newsForView)
+        public IActionResult Edit(NewsView newsForView)
         {
 
             try
@@ -81,7 +81,7 @@ namespace WebAPIdemo_DPOTech.Controllers
             }
         }
         [HttpDelete("Delete/{name}")]
-        public IActionResult Delete(NewsForView newsForView)
+        public IActionResult Delete(NewsView newsForView)
         {
             try
             {

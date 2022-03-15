@@ -13,7 +13,7 @@ builder.Services.AddDbContext<DbWebContext>(connection =>
 });
 builder.Services.AddScoped<ICategoryService,CategoryService>();
 builder.Services.AddScoped<INewsService, NewsService>();
-builder.Services.AddScoped<NewsServiceForController>();
+builder.Services.AddScoped<NewsServiceController>();
 builder.Services.AddScoped<CategoryService>();
 
 builder.Services.AddControllers();

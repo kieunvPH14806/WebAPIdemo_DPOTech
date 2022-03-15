@@ -6,28 +6,28 @@ using WebAPIdemo_DPOTech.DB.Models;
 
 namespace WebAPIdemo_DPOTech.Buisness.ServiceForController;
 
-public class CategoryServiceForController
+public class CategoryServiceController
 {
     private readonly ICategoryService _categoryService;
-    private List<CategoryForView> _lstCategoryForViews;
+    private List<CategoryView> _lstCategoryForViews;
 
-    public CategoryServiceForController(ICategoryService categoryService)
+    public CategoryServiceController(ICategoryService categoryService)
     {
         _categoryService = categoryService;
         
     }
 
-    public List<CategoryForView> GetLstCategoryForViews()
+    public List<CategoryView> GetLstCategoryForViews()
     {
         foreach (var x in _categoryService.GetData().Where(c => c.CategoryStatus == true))
         {
-            CategoryForView categorytemp = new CategoryForView(x.CategoryId, x.CategoryName, x.CategoryDescription);
+            CategoryView categorytemp = new CategoryView(x.CategoryId, x.CategoryName, x.CategoryDescription);
             _lstCategoryForViews.Add(categorytemp);
         }
         return _lstCategoryForViews;
     }
 
-    public string AddCategory(CategoryForView categoryNew)
+    public string AddCategory(CategoryView categoryNew)
     {
         Category categoryInput = new Category();
         categoryInput.CategoryId = Guid.NewGuid();
@@ -35,7 +35,7 @@ public class CategoryServiceForController
         categoryInput.CategoryDescription = categoryNew.CategoryDescription;
         return _categoryService.Add(categoryInput) + _categoryService.Save();
     }
-    public string EditCategory(CategoryForView categoryEdited)
+    public string EditCategory(CategoryView categoryEdited)
 
     {
         Category categoryInput = new Category();
@@ -45,7 +45,7 @@ public class CategoryServiceForController
         return _categoryService.Edit(categoryInput) + _categoryService.Save();
     }
 
-    public string DeleteCategory(CategoryForView categoryDelete)
+    public string DeleteCategory(CategoryView categoryDelete)
     {
         Category categoryInput = new Category();
         categoryInput = _categoryService.GetData().Find(c => c.CategoryId == categoryDelete.CategoryId);

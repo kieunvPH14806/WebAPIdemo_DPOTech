@@ -1,6 +1,6 @@
 ﻿namespace WebAPIdemo_DPOTech.Buisness.ModelsForController;
 
-public class CategoryForView
+public class CategoryView
 {
     private Guid categoryId;
 
@@ -8,12 +8,12 @@ public class CategoryForView
 
     private string categoryDescription;
 
-    public CategoryForView()
+    public CategoryView()
     {
         
     }
 
-    public CategoryForView(Guid categoryId, string categoryName, string categoryDescription)
+    public CategoryView(Guid categoryId, string categoryName, string categoryDescription)
     {
         this.categoryId = categoryId;
         this.categoryName = categoryName;

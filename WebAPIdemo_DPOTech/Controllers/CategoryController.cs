@@ -12,22 +12,22 @@ namespace WebAPIdemo_DPOTech.Controllers
     [ApiController]
     public class CategoryController : ControllerBase
     {
-        private readonly CategoryServiceForController _categoryController;
+        private readonly CategoryServiceController _categoryController;
 
 
-        public CategoryController(CategoryServiceForController categoryController)
+        public CategoryController(CategoryServiceController categoryController)
         {
             _categoryController = categoryController;
         }
 
         [HttpGet("Get")]
-        public List<Buisness.ModelsForController.CategoryForView> GetCategories()
+        public List<Buisness.ModelsForController.CategoryView> GetCategories()
         {
             return _categoryController.GetLstCategoryForViews();
         }
 
         [HttpPost("Add")]
-        public IActionResult AddNewCategory(CategoryForView newCategoryForView)
+        public IActionResult AddNewCategory(CategoryView newCategoryForView)
         {
             try
             {
@@ -41,7 +41,7 @@ namespace WebAPIdemo_DPOTech.Controllers
         }
 
         [HttpPut("Edit/{name}")]
-        public IActionResult Edit(CategoryForView categoryForViewEdited)
+        public IActionResult Edit(CategoryView categoryForViewEdited)
         {
             try
             {
@@ -54,7 +54,7 @@ namespace WebAPIdemo_DPOTech.Controllers
         }
 
         [HttpDelete("Delete/{name}")]
-        public IActionResult Delete(CategoryForView categoryForViewToDelete)
+        public IActionResult Delete(CategoryView categoryForViewToDelete)
         {
             try
             {

@@ -5,15 +5,15 @@ using Category = WebAPIdemo_DPOTech.DB.Models.Category;
 
 namespace WebAPIdemo_DPOTech.Buisness.ServiceForController;
 
-public class NewsServiceForController
+public class NewsServiceController
 {
     private readonly ICategoryService _categoryService;
     private readonly INewsService _newsService;
     private List<Category> _lstCategories;
     private List<News> _lstNews;
-    private List<NewsForView> _lstNewsForViews;
+    private List<NewsView> _lstNewsForViews;
 
-    public NewsServiceForController(ICategoryService categoryService, INewsService newsService)
+    public NewsServiceController(ICategoryService categoryService, INewsService newsService)
     {
         _categoryService = categoryService;
         _newsService = newsService;
@@ -35,11 +35,11 @@ public class NewsServiceForController
         return _lstNews;
     }
 
-    public List<NewsForView> GetNewsForAll()
+    public List<NewsView> GetNewsForAll()
     {
         GetListCategories();
         GetListNews();
-        _lstNewsForViews = new List<NewsForView>();
+        _lstNewsForViews = new List<NewsView>();
         var listNewsTemp = from news in _lstNews
                            join
                                category in _lstCategories on news.CategoryId equals category.CategoryId
@@ -53,13 +53,13 @@ public class NewsServiceForController
                            };
         foreach (var x in listNewsTemp)
         {
-            NewsForView news = new NewsForView(x.NewsID, x.CategoryOfNews, x.NewName, x.NewContent, x.NewImage);
+            NewsView news = new NewsView(x.NewsID, x.CategoryOfNews, x.NewName, x.NewContent, x.NewImage);
             _lstNewsForViews.Add(news);
         }
         return _lstNewsForViews;
     }
 
-    public string AddNews(NewsForView newsForView)
+    public string AddNews(NewsView newsForView)
     {
         GetListCategories();
         GetListNews();
@@ -77,16 +77,16 @@ public class NewsServiceForController
         }
         else
         {
-            Category newCategoryForView = new Category();
-            newCategoryForView.CategoryName = newsForView.NewsName;
-            _categoryService.Add(newCategoryForView);
+            Category newCategory = new Category();
+            newCategory.CategoryName = newsForView.NewsName;
+            _categoryService.Add(newCategory);
         }
 
         return _newsService.Add(newInput) + "  " + _categoryService.Save();
 
     }
 
-    public string EditNews(NewsForView newsForView)
+    public string EditNews(NewsView newsForView)
     {
         GetListCategories();
         GetListNews();
@@ -114,7 +114,7 @@ public class NewsServiceForController
         return _newsService.Add(newInput) + " " + _categoryService.Save();
     }
 
-    public string DeleteNews(NewsForView newsForView)
+    public string DeleteNews(NewsView newsForView)
     {
         GetListNews();
         News news = new News();

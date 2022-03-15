@@ -1,6 +1,6 @@
 ﻿namespace WebAPIdemo_DPOTech.Buisness.ModelsForController;
 
-public class NewsForView
+public class NewsView
 {
     private Guid newsId;
     private string category;
@@ -9,12 +9,12 @@ public class NewsForView
     private string newsImage;
 
 
-    public NewsForView()
+    public NewsView()
     {
 
     }
 
-    public NewsForView(Guid newsId, string category, string newsName, string newsContent, string newsImage)
+    public NewsView(Guid newsId, string category, string newsName, string newsContent, string newsImage)
     {
         this.newsId = newsId;
         this.category = category;
