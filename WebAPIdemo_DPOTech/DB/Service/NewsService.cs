@@ -5,12 +5,12 @@ using WebAPIdemo_DPOTech.DB.Models;
 
 namespace WebAPIdemo_DPOTech.DB.Service;
 
-public class NewsService:INewsService
+public class NewsService : INewsService
 {
     private readonly DbWebContext.DbWebContext _dbContext;
-    public NewsService(DbWebContext.DbWebContext dbContext )
+    public NewsService(DbWebContext.DbWebContext dbContext)
     {
-        _dbContext=dbContext;
+        _dbContext = dbContext;
     }
     public List<News> GetData()
     {
@@ -26,7 +26,7 @@ public class NewsService:INewsService
 
     public string Add(News news)
     {
-        
+
         news.NewsStatus = true;
         try
         {
@@ -63,7 +63,7 @@ public class NewsService:INewsService
         }
         catch (Exception e)
         {
-            return "Erorr"+ e;
+            return "Erorr" + e;
         }
     }
 

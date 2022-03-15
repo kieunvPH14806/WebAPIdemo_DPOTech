@@ -81,7 +81,7 @@ public class ServiceForController
             _categoryService.Add(newCategory);
         }
 
-        return _newsService.Add(newInput)+"  "+_categoryService.Save();
+        return _newsService.Add(newInput) + "  " + _categoryService.Save();
 
     }
 
@@ -110,14 +110,14 @@ public class ServiceForController
             _categoryService.Add(newCategory);
         }
 
-       return _newsService.Add(newInput)+" "+_categoryService.Save();
+        return _newsService.Add(newInput) + " " + _categoryService.Save();
     }
 
     public string DeleteNews(NewsForView newsForView)
     {
         GetListNews();
         News news = new News();
-        news = _lstNews.Find(c => c.NewsName==newsForView.NewsName);
+        news = _lstNews.Find(c => c.NewsName == newsForView.NewsName);
         return _newsService.Delete(news) + " " + _newsService.Save();
     }
 

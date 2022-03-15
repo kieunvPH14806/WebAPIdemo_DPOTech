@@ -5,12 +5,12 @@ using WebAPIdemo_DPOTech.DB.Models;
 
 namespace WebAPIdemo_DPOTech.DB.Service;
 
-public class CategoryService:ICategoryService
+public class CategoryService : ICategoryService
 {
     private readonly DbWebContext.DbWebContext _dbContext;
-    public CategoryService(DbWebContext.DbWebContext dbContext )
+    public CategoryService(DbWebContext.DbWebContext dbContext)
     {
-        _dbContext=dbContext;
+        _dbContext = dbContext;
     }
     public List<Category> GetData()
     {
@@ -26,7 +26,7 @@ public class CategoryService:ICategoryService
 
     public string Add(Category category)
     {
-        
+
         category.CategoryStatus = true;
         try
         {
@@ -55,7 +55,7 @@ public class CategoryService:ICategoryService
 
     public string Delete(Category category)
     {
-        category.CategoryStatus=false;
+        category.CategoryStatus = false;
         try
         {
             _dbContext.Categories.Update(category);
@@ -63,7 +63,7 @@ public class CategoryService:ICategoryService
         }
         catch (Exception e)
         {
-            return "Erorr"+ e;
+            return "Erorr" + e;
         }
     }
 

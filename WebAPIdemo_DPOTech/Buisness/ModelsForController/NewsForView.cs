@@ -7,7 +7,7 @@ public class NewsForView
     private string newsName;
     private string newsContent;
     private string newsImage;
-    
+
 
     public NewsForView()
     {
@@ -21,7 +21,7 @@ public class NewsForView
         this.newsName = newsName;
         this.newsContent = newsContent;
         this.newsImage = newsImage;
-        
+
     }
 
 

@@ -12,5 +12,5 @@ public class News
     public string? NewsImage { get; set; }
     public bool NewsStatus { get; set; }
     public Category Category { get; set; }
-    
+
 }

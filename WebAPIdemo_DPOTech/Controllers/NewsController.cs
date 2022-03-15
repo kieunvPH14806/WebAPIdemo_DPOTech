@@ -1,6 +1,8 @@
 ﻿using System.Net;
+
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+
 using WebAPIdemo_DPOTech.Buisness.ModelsForController;
 using WebAPIdemo_DPOTech.Buisness.ServiceForController;
 
@@ -38,7 +40,7 @@ namespace WebAPIdemo_DPOTech.Controllers
             try
             {
 
-                NewsForView newsForView= new NewsForView();
+                NewsForView newsForView = new NewsForView();
                 newsForView = _serviceForController.GetNewsForAll()[_serviceForController.GetNewsForAll().FindIndex(c => c.NewsName == name)];
                 return newsForView;
             }
@@ -59,14 +61,14 @@ namespace WebAPIdemo_DPOTech.Controllers
             catch (Exception e)
             {
 
-                return BadRequest(" Erorr"+e);
+                return BadRequest(" Erorr" + e);
             }
         }
 
         [HttpPut("Edit/{name}")]
         public IActionResult Edit(NewsForView newsForView)
         {
-            
+
             try
             {
                 _serviceForController.EditNews(newsForView);

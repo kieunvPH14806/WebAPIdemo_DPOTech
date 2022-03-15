@@ -1,10 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
 using WebAPIdemo_DPOTech.DB.Models;
 
 namespace WebAPIdemo_DPOTech.Confiction;
 
-public class NewsConfiguration:IEntityTypeConfiguration<News>
+public class NewsConfiguration : IEntityTypeConfiguration<News>
 {
     public void Configure(EntityTypeBuilder<News> builder)
     {
