@@ -12,9 +12,9 @@ namespace WebAPIdemo_DPOTech.Controllers
     [ApiController]
     public class NewsController : ControllerBase
     {
-        private readonly ServiceForController _serviceForController;
+        private readonly NewsServiceForController _serviceForController;
 
-        public NewsController(ServiceForController serviceForController)
+        public NewsController(NewsServiceForController serviceForController)
         {
             _serviceForController = serviceForController;
         }

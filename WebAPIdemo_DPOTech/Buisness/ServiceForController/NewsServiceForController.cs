@@ -1,10 +1,11 @@
 ﻿using WebAPIdemo_DPOTech.Buisness.ModelsForController;
 using WebAPIdemo_DPOTech.DB.IService;
 using WebAPIdemo_DPOTech.DB.Models;
+using Category = WebAPIdemo_DPOTech.DB.Models.Category;
 
 namespace WebAPIdemo_DPOTech.Buisness.ServiceForController;
 
-public class ServiceForController
+public class NewsServiceForController
 {
     private readonly ICategoryService _categoryService;
     private readonly INewsService _newsService;
@@ -12,7 +13,7 @@ public class ServiceForController
     private List<News> _lstNews;
     private List<NewsForView> _lstNewsForViews;
 
-    public ServiceForController(ICategoryService categoryService, INewsService newsService)
+    public NewsServiceForController(ICategoryService categoryService, INewsService newsService)
     {
         _categoryService = categoryService;
         _newsService = newsService;
@@ -76,9 +77,9 @@ public class ServiceForController
         }
         else
         {
-            Category newCategory = new Category();
-            newCategory.CategoryName = newsForView.NewsName;
-            _categoryService.Add(newCategory);
+            Category newCategoryForView = new Category();
+            newCategoryForView.CategoryName = newsForView.NewsName;
+            _categoryService.Add(newCategoryForView);
         }
 
         return _newsService.Add(newInput) + "  " + _categoryService.Save();
@@ -103,11 +104,11 @@ public class ServiceForController
         }
         else
         {
-            Category newCategory = new Category();
-            newCategory.CategoryId = Guid.NewGuid();
-            newCategory.CategoryName = newsForView.NewsName;
-            newInput.CategoryId = newCategory.CategoryId;
-            _categoryService.Add(newCategory);
+            Category newCategoryForView = new Category();
+            newCategoryForView.CategoryId = Guid.NewGuid();
+            newCategoryForView.CategoryName = newsForView.NewsName;
+            newInput.CategoryId = newCategoryForView.CategoryId;
+            _categoryService.Add(newCategoryForView);
         }
 
         return _newsService.Add(newInput) + " " + _categoryService.Save();

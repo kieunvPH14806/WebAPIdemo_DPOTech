@@ -13,7 +13,8 @@ builder.Services.AddDbContext<DbWebContext>(connection =>
 });
 builder.Services.AddScoped<ICategoryService,CategoryService>();
 builder.Services.AddScoped<INewsService, NewsService>();
-builder.Services.AddScoped<ServiceForController>();
+builder.Services.AddScoped<NewsServiceForController>();
+builder.Services.AddScoped<CategoryService>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

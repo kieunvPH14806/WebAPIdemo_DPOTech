@@ -1,7 +1,10 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using WebAPIdemo_DPOTech.Buisness.ModelsForController;
+using WebAPIdemo_DPOTech.Buisness.ServiceForController;
 using WebAPIdemo_DPOTech.DB.IService;
 using WebAPIdemo_DPOTech.DB.Models;
+using Category = WebAPIdemo_DPOTech.DB.Models.Category;
 
 namespace WebAPIdemo_DPOTech.Controllers
 {
@@ -9,26 +12,26 @@ namespace WebAPIdemo_DPOTech.Controllers
     [ApiController]
     public class CategoryController : ControllerBase
     {
-        private readonly ICategoryService _categoryService;
+        private readonly CategoryServiceForController _categoryController;
 
-        public CategoryController(ICategoryService categoryService)
+
+        public CategoryController(CategoryServiceForController categoryController)
         {
-            _categoryService = categoryService;
+            _categoryController = categoryController;
         }
 
         [HttpGet("Get")]
-        public List<Category> GetCategories()
+        public List<Buisness.ModelsForController.CategoryForView> GetCategories()
         {
-            return _categoryService.GetData();
+            return _categoryController.GetLstCategoryForViews();
         }
 
         [HttpPost("Add")]
-        public IActionResult AddNewCategory(Category newCategory)
+        public IActionResult AddNewCategory(CategoryForView newCategoryForView)
         {
             try
             {
-                _categoryService.Add(newCategory);
-                return Ok(" thêm thành công!");
+                return Ok(_categoryController.AddCategory(newCategoryForView));
             }
             catch (Exception e)
             {
@@ -37,19 +40,32 @@ namespace WebAPIdemo_DPOTech.Controllers
             }
         }
 
-        [HttpPut("Edit")]
-        public IActionResult EditCategory(Category categoryEdited)
+        [HttpPut("Edit/{name}")]
+        public IActionResult Edit(CategoryForView categoryForViewEdited)
         {
             try
             {
-                _categoryService.Edit(categoryEdited);
-                return Ok(" Sửa Thành Công!");
+                return Ok(_categoryController.EditCategory(categoryForViewEdited));
             }
             catch (Exception e)
             {
                 return BadRequest("Erorr" + e);
             }
         }
+
+        [HttpDelete("Delete/{name}")]
+        public IActionResult Delete(CategoryForView categoryForViewToDelete)
+        {
+            try
+            {
+                return Ok(_categoryController.DeleteCategory(categoryForViewToDelete));
+            }
+            catch (Exception e)
+            {
+                return BadRequest("Erorr"+ e);
+            }
+        }
+        
     }
 
 }

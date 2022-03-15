@@ -11,7 +11,7 @@ public class NewsConfiguration : IEntityTypeConfiguration<News>
     {
         builder.ToTable("NEWS");
         builder.HasKey(p => p.NewsId);
-        builder.HasOne(p => p.Category)
+        builder.HasOne(p => p.CategoryForView)
             .WithMany(p => p.News);
     }
 }

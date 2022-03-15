@@ -21,9 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Buisness\ServiceForController\" />
     <Folder Include="DB\DbContext\" />
-    <Folder Include="DB\Models\" />
     <Folder Include="DB\Configuration\" />
   </ItemGroup>
 

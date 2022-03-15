@@ -11,6 +11,6 @@ public class News
     public string? NewsContent { get; set; }
     public string? NewsImage { get; set; }
     public bool NewsStatus { get; set; }
-    public Category Category { get; set; }
+    public Category CategoryForView { get; set; }
 
 }
