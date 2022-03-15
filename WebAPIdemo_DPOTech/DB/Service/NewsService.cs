@@ -1,21 +1,22 @@
 ﻿using WebAPIdemo_DPOTech.DB.IService;
 using WebAPIdemo_DPOTech.DB.DbWebContext;
+using WebAPIdemo_DPOTech.DB.Models;
 
 
 namespace WebAPIdemo_DPOTech.DB.Service;
 
-public class Service<T>:ICategoryService<T> where T : class
+public class NewsService:INewsService
 {
     private readonly DbWebContext.DbWebContext _dbContext;
-    public Service(DbWebContext.DbWebContext dbContext )
+    public NewsService(DbWebContext.DbWebContext dbContext )
     {
         _dbContext=dbContext;
     }
-    public List<T> GetData()
+    public List<News> GetData()
     {
         try
         {
-            return _dbContext.Set<T>().ToList();
+            return _dbContext.Set<News>().ToList();
         }
         catch (Exception e)
         {
@@ -23,11 +24,13 @@ public class Service<T>:ICategoryService<T> where T : class
         }
     }
 
-    public string Add(T @object)
+    public string Add(News news)
     {
+        
+        news.NewsStatus = true;
         try
         {
-            _dbContext.Set<T>().Add(@object);
+            _dbContext.Set<News>().Add(news);
             return "Sucessful";
         }
         catch (Exception e)
@@ -36,11 +39,11 @@ public class Service<T>:ICategoryService<T> where T : class
         }
     }
 
-    public string Edit(T @object)
+    public string Edit(News news)
     {
         try
         {
-            _dbContext.Set<T>().Update(@object);
+            _dbContext.Set<News>().Update(news);
             return "Sucessful";
         }
         catch (Exception e)
@@ -50,11 +53,12 @@ public class Service<T>:ICategoryService<T> where T : class
         }
     }
 
-    public string Delete(T @object)
+    public string Delete(News news)
     {
+        news.NewsStatus = false;
         try
         {
-            _dbContext.Set<T>().Remove(@object);
+            _dbContext.Set<News>().Update(news);
             return "Sucessful";
         }
         catch (Exception e)

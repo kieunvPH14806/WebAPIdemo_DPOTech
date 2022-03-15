@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -12,10 +13,10 @@ namespace WebAPIdemo_DPOTech.Migrations
                 name: "CATEGORY",
                 columns: table => new
                 {
-                    CategoryId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CategoryId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CategoryName = table.Column<string>(type: "nvarchar(25)", maxLength: 25, nullable: false),
-                    CategoryDescription = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    CategoryDescription = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true),
+                    CategoryStatus = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -26,11 +27,12 @@ namespace WebAPIdemo_DPOTech.Migrations
                 name: "NEWS",
                 columns: table => new
                 {
-                    NewsId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    CategoryId = table.Column<int>(type: "int", nullable: false),
+                    NewsId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CategoryId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     NewsName = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
-                    NewsContent = table.Column<int>(type: "int", nullable: true)
+                    NewsContent = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NewsImage = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NewsStatus = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -39,7 +41,8 @@ namespace WebAPIdemo_DPOTech.Migrations
                         name: "FK_NEWS_CATEGORY_CategoryId",
                         column: x => x.CategoryId,
                         principalTable: "CATEGORY",
-                        principalColumn: "CategoryId");
+                        principalColumn: "CategoryId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(

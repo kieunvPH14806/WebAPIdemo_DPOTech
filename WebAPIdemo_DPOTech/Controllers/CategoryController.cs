@@ -9,14 +9,14 @@ namespace WebAPIdemo_DPOTech.Controllers
     [ApiController]
     public class CategoryController : ControllerBase
     {
-        private readonly ICategoryService<Category> _categoryService;
+        private readonly ICategoryService _categoryService;
 
-        public CategoryController(ICategoryService<Category> categoryService)
+        public CategoryController(ICategoryService categoryService)
         {
             _categoryService = categoryService;
         }
 
-        [HttpGet("GetCategories")]
+        [HttpGet("Get")]
         public List<Category> GetCategories()
         {
             return _categoryService.GetData();

@@ -24,11 +24,13 @@ public class CategoryService:ICategoryService
         }
     }
 
-    public string Add(T @object)
+    public string Add(Category category)
     {
+        
+        category.CategoryStatus = true;
         try
         {
-            _dbContext.Categories.Add(@object);
+            _dbContext.Categories.Add(category);
             return "Sucessful";
         }
         catch (Exception e)
@@ -37,11 +39,11 @@ public class CategoryService:ICategoryService
         }
     }
 
-    public string Edit(T @object)
+    public string Edit(Category category)
     {
         try
         {
-            _dbContext.Categories.Update(@object);
+            _dbContext.Categories.Update(category);
             return "Sucessful";
         }
         catch (Exception e)
@@ -51,11 +53,12 @@ public class CategoryService:ICategoryService
         }
     }
 
-    public string Delete(T @object)
+    public string Delete(Category category)
     {
+        category.CategoryStatus=false;
         try
         {
-            _dbContext.Categories.Remove(@object);
+            _dbContext.Categories.Update(category);
             return "Sucessful";
         }
         catch (Exception e)

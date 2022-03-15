@@ -24,19 +24,21 @@ namespace WebAPIdemo_DPOTech.Migrations
 
             modelBuilder.Entity("WebAPIdemo_DPOTech.DB.Models.Category", b =>
                 {
-                    b.Property<int>("CategoryId")
+                    b.Property<Guid>("CategoryId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CategoryId"), 1L, 1);
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("CategoryDescription")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<string>("CategoryName")
                         .IsRequired()
                         .HasMaxLength(25)
                         .HasColumnType("nvarchar(25)");
+
+                    b.Property<bool>("CategoryStatus")
+                        .HasColumnType("bit");
 
                     b.HasKey("CategoryId");
 
@@ -45,22 +47,26 @@ namespace WebAPIdemo_DPOTech.Migrations
 
             modelBuilder.Entity("WebAPIdemo_DPOTech.DB.Models.News", b =>
                 {
-                    b.Property<int>("NewsId")
+                    b.Property<Guid>("NewsId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("uniqueidentifier");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("NewsId"), 1L, 1);
+                    b.Property<Guid>("CategoryId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("CategoryId")
-                        .HasColumnType("int");
+                    b.Property<string>("NewsContent")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("NewsContent")
-                        .HasColumnType("int");
+                    b.Property<string>("NewsImage")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NewsName")
                         .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
+
+                    b.Property<bool>("NewsStatus")
+                        .HasColumnType("bit");
 
                     b.HasKey("NewsId");
 
@@ -74,6 +80,7 @@ namespace WebAPIdemo_DPOTech.Migrations
                     b.HasOne("WebAPIdemo_DPOTech.DB.Models.Category", "Category")
                         .WithMany("News")
                         .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Category");

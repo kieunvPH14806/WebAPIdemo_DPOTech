@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using WebAPIdemo_DPOTech.Buisness.ServiceForController;
 using WebAPIdemo_DPOTech.DB.DbWebContext;
 using WebAPIdemo_DPOTech.DB.IService;
 using WebAPIdemo_DPOTech.DB.Service;
@@ -10,7 +11,9 @@ builder.Services.AddDbContext<DbWebContext>(connection =>
 {
     connection.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConection"));
 });
-builder.Services.AddScoped(typeof(ICategoryService<>), typeof(CategoryService<>));
+builder.Services.AddScoped<ICategoryService,CategoryService>();
+builder.Services.AddScoped<INewsService, NewsService>();
+builder.Services.AddScoped<ServiceForController>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

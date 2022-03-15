@@ -1,10 +1,12 @@
-﻿namespace WebAPIdemo_DPOTech.DB.IService;
+﻿using WebAPIdemo_DPOTech.DB.Models;
 
-public interface ICategoryService<T>
+namespace WebAPIdemo_DPOTech.DB.IService;
+
+public interface ICategoryService
 {
-    public List<T> GetData();
-    public string Add(T @object);
-    public string Edit(T @object);
-    public string Delete(T @object);
+    public List<Category> GetData();
+    public string Add(Category category);
+    public string Edit(Category category);
+    public string Delete(Category category);
     public string Save();
 }

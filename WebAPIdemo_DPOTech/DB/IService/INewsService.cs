@@ -1,10 +1,12 @@
-﻿namespace WebAPIdemo_DPOTech.DB.IService;
+﻿using WebAPIdemo_DPOTech.DB.Models;
 
-public interface ICategoryService<T>
+namespace WebAPIdemo_DPOTech.DB.IService;
+
+public interface INewsService
 {
-    public List<T> GetData();
-    public string Add(T @object);
-    public string Edit(T @object);
-    public string Delete(T @object);
+    public List<News> GetData();
+    public string Add(News news);
+    public string Edit(News news);
+    public string Delete(News news);
     public string Save();
 }
